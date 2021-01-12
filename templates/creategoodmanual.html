@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-1dax{border-color:inherit;font-size:11px;text-align:center;vertical-align:middle}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<form method="post">
+    {% csrf_token %}
+<table class="tg">
+<tbody>
+  <tr>
+    <td class="tg-c3ow">Nazwa</td>
+    <td class="tg-0pky"><input type="text" name='name'></td>
+  </tr>
+    <tr> {{ index_error }}
+    <td class="tg-c3ow">Indeks</td>
+    <td class="tg-0pky"><input type="number" name="index" min="1000000000" max="9999999999"></td>
+  </tr>
+  <tr>
+    <td class="tg-baqh">Opis</td>
+    <td class="tg-0lax"><input type="text" name="description"></td>
+  </tr>
+  <tr>
+    <td class="tg-baqh">Ilość</td>
+    <td class="tg-0lax"><input type="number" name="quantity" min="0"></td>
+  </tr>
+</tbody>
+</table>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-1dax">Element</th>
+    <th class="tg-0pky">Ilość potrzebna</th>
+  </tr>
+</thead>
+<tbody>
+{% for material in materials %}
+  <tr>
+    <td class="tg-c3ow"><input type="checkbox" name="materials" value='{{ material.id }}'>{{ material.name }}</td>
+    <td class="tg-0pky"><input type="number" type="number" min=0 name="{{ material.id }}" value='0'></td>
+  </tr>
+ {% endfor %}
+</tbody>
+</table>
+    <input type="submit" value="Zapisz">
+{{ message }}
+{{ dok }}
+    </form>
+
+
+{% endblock %}

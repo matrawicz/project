@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+    {% for item in object_list %}
+        <li>
+           <h4>{{ item }} </h4><a href="{{ item.get_update_url }}">Edytuj</a><br>
+            <a href="{{ item.get_delete_url }}">Usuń</a><br>
+        {% if item.get_tryproduce_url %} <a href="{{ item.get_tryproduce_url }}">Sprawdź możliwość producji</a>
+        {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

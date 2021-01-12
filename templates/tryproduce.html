@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-wp8o{border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-550x{border-color:#000000;font-size:11px;text-align:center;vertical-align:middle}
+.tg .tg-73oq{border-color:#000000;text-align:center;vertical-align:top}
+</style>
+    <h3>{{ good.name }}</h3><br>
+    <form method="post">
+    {% csrf_token %}
+    Ile wyprodukować? >>> <input type="number" name="produce_quantity" min="1">
+    <input type="submit" value="Sprawdź">
+    </form> <br>
+    <h2>Zapotrzebowanie dla tego towaru:</h2><br>
+    {{ message }}
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-550x">Materiał</th>
+    <th class="tg-73oq">Ilość potrzebna</th>
+      <th class="tg-550x">Ilość na stanie</th>
+  </tr>
+</thead>
+<tbody>
+    {% for need in needs %}
+<tr>
+    <td class="tg-wp8o">{{ need.0.name }}</td>
+    <td class="tg-73oq">{{ need.1 }}</td>
+    <td class="tg-wp8o">{{ need.0.quantity }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>{% if produce_quantity %}
+    Chcesz wyprodukować {{ produce_quantity }} szt. {{ good.name }}<br> {% endif %}
+{% for error in error_needs %}
+    {{ error }}<br>
+    {% endfor %}
+
+{% endblock %}

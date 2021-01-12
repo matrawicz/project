@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <form method="post">
+    {% csrf_token %}
+    <input type="text" name='supplier' value="{{ supplier }}" disabled="disabled">
+        <input type="text" name="number" value="{{ number }}">
+            <table>
+        <thead>
+          <tr>
+
+            <th>Element</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+        {% for material in materials %}
+
+          <tr>
+            <td><input type="checkbox" name="materials" value='{{ material.id }}'>{{ material.name }}</td>
+
+          </tr>
+
+
+        {% endfor %}
+             <select name="destination">
+                 {% for destination in destinations %}
+    <option value="{{ destination }}" {% if destination == 'Zakup' %}selected {% endif %}>{{ destination}}</option>
+        {% endfor %}
+  </select>
+        </tbody>
+        </table>
+    <input type="submit" value="Zapisz">
+    {{ message }}
+{{ dok }}
+    </form>
+
+
+{% endblock %}

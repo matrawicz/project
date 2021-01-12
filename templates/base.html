@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!-- Template by html.am -->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>3 Column Layout</title>
+	<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+
+		#container .column {
+			position: relative;
+			float: left;
+		}
+
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+
+		#left {
+			width: 180px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+
+		#footer {
+			clear: both;
+		}
+
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+
+		* html #footer-wrapper {
+			float: left;
+			position: relative;
+			width: 100%;
+			padding-bottom: 10010px;
+			margin-bottom: -10000px;
+			background: #fff;
+		}
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		nav ul a {
+			color: darkgreen;
+			text-decoration: none;
+		}
+
+		#header, #footer {
+			font-size: large;
+			padding: 0.3em;
+			background: #BCCE98;
+		}
+
+		#left {
+			background: #DAE9BC;
+		}
+
+		#right {
+			background: #F7FDEB;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+		/* =============================
+		This script generates sample text for the body content.
+		You can remove this script and any reference to it.
+		 ============================= */
+		var bodyText=["The smaller your reality, the more convinced you are that you know everything.", "If the facts don't fit the theory, change the facts.", "The past has no power over the present moment.", "This, too, will pass.", "</p><p>You will not be punished for your anger, you will be punished by your anger.", "Peace comes from within. Do not seek it without.", "<h3>Heading</h3><p>The most important moment of your life is now. The most important person in your life is the one you are with now, and the most important activity in your life is the one you are involved with now."]
+		function generateText(sentenceCount){
+			for (var i=0; i<sentenceCount; i++)
+			document.write(bodyText[Math.floor(Math.random()*7)]+" ")
+		}
+	</script>
+</head>
+
+<body>
+
+	<header id="header"><p>Projekt zaliczeniowy kursu CL</p></header>
+
+	<div id="container">
+
+		<main id="center" class="column">
+            {% block content %}
+            {% endblock %}
+		</main>
+
+		<nav id="left" class="column">
+			<h3>Opcje dla gości</h3>
+			<ul>
+                <li><a href="{% url 'MainPage' %}">Strona główna</a></li>
+				<li><a href="{% url 'listWorkStation' %}">Lista stanowisk</a></li>
+				<li><a href="{% url 'listSupplier' %}">Dostawcy</a></li>
+				<li><a href="{% url 'listDiscountSupplier' %}">Rabaty od dostawców</a></li>
+				<li><a href="{% url 'listCustomer' %}">Klienci</a></li>
+				<li><a href="{% url 'listDiscountCustomer' %}">Rabaty dla klientów</a></li>
+				<li><a href="{% url 'listMaterial' %}">Materiały</a></li>
+				<li><a href="{% url 'listDocumentSupplier' %}">Dokumenty dostawców</a></li>
+				<li><a href="{% url 'listGood' %}">Towary</a></li>
+				<li><a href="{% url 'listDocumentCustomer' %}">Dokumenty klientów</a></li>
+			</ul>
+			{% if user.is_authenticated %}<h3>Opcje dla zalogowanych</h3>
+			<ul>
+				<li><a href="{% url 'createWorkStation' %}">Dodaj stanowisko pracy</a></li>
+				<li><a href="{% url 'createSupplier' %}">Dodaj dostawcę</a></li>
+				<li><a href="{% url 'createDiscountSupplier' %}">Dodaj rabat od dostawcy</a></li>
+				<li><a href="{% url 'createCustomer' %}">Dodaj klienta</a></li>
+				<li><a href="{% url 'createDiscountCustomer' %}">Dodaj rabat dla klienta</a></li>
+				<li><a href="{% url 'createMaterial' %}">Dodaj materiał</a></li>
+				<li><a href="{% url 'createGood' %}">Dodaj towar</a></li>
+			</ul>{% endif %}
+
+		</nav>
+
+		<div id="right" class="column">
+						<h3>Sekcja użytkownika</h3>
+			<p>{% if user.is_authenticated %}
+    <li>
+        Dzień dobry {{ user }}
+        <a href="{% url 'logout' %}">Wyloguj</a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{% url 'login' %}">Zaloguj</a>
+    </li>
+    <li>
+        <a href="{% url 'addUser' %}">Rejestracja</a><br>
+        (Tylko w ramach projektu)
+    </li>
+    {% endif %} </p>
+		</div>
+
+	</div>
+
+	<div id="footer-wrapper">
+		<footer id="footer"><p>Data: {{ today }} | Autor: {{ author }} | Wersja aplikacji {{ version }}</p></footer>
+	</div>
+
+</body>
+
+</html>
