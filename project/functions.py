@@ -4,6 +4,10 @@ from project.models import DocumentSupplier, DocumentCustomer
 
 
 def get_number_supplier_document():
+    """
+
+    :return: unique number of document
+    """
     try:
         last_number = DocumentSupplier.objects.last().id
         year = datetime.datetime.now().year
@@ -14,6 +18,10 @@ def get_number_supplier_document():
 
 
 def get_number_customer_document():
+    """
+
+    :return: unique number of document
+    """
     try:
         last_number = DocumentCustomer.objects.last().id
         year = datetime.datetime.now().year

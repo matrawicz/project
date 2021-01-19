@@ -32,11 +32,9 @@ def workstation():
 @pytest.fixture
 def supplier():
     for i in range(7):
-        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         choices = ['BHP', 'SPA', 'SZL', 'AUT']
-        random.shuffle(numbers)
         random.shuffle(choices)
-        nip = f'{numbers[6]}{numbers[3]}1{numbers[0]}{numbers[5]}{numbers[2]}{numbers[4]}{numbers[1]}{numbers[3]}{numbers[-1]}'
+        nip = f'10000{i+10}000'
         industy = choices[0]
         Supplier.objects.create(name=f'Supplier {i} XYZ', address=f'New York, LongStreet {i*10}', nip=nip, industy=industy)
     return Supplier.objects.all()
@@ -52,11 +50,9 @@ def discountsupplier(supplier):
 @pytest.fixture
 def customer():
     for i in range(7):
-        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         choices = ['BHP', 'SPA', 'SZL', 'AUT', 'HAN', 'BUD']
-        random.shuffle(numbers)
         random.shuffle(choices)
-        nip = f'{numbers[6]}{numbers[3]}1{numbers[0]}{numbers[5]}{numbers[2]}{numbers[4]}{numbers[1]}{numbers[3]}{numbers[-1]}'
+        nip = f'2000{i+10}0000'
         industy = choices[0]
         Customer.objects.create(name=f'Customer No.{i}', address=f'NewStreet {i*13}', delivery_address=f'OldStreet {i*6}',
                                 nip=nip, industy=industy)
@@ -75,9 +71,7 @@ def material(supplier):
     for i in range(80):
         supplier_id = [1,2,3,4,5,6]
         random.shuffle(supplier_id)
-        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        random.shuffle(numbers)
-        index = f'{numbers[6]}{numbers[3]}1{numbers[0]}{numbers[5]}{numbers[2]}{numbers[4]}{numbers[1]}{numbers[3]}{numbers[-1]}'
+        index = f'30{i+10}000000'
         Material.objects.create(name=f'Material no {i+1}', index=index, description=f'Something {i}', quantity=i*2, supplier=supplier[supplier_id[3]])
     return Material.objects.all()
 
@@ -103,10 +97,8 @@ def documentsupplier(supplier, material):
 @pytest.fixture
 def good(material):
     for i in range(6):
-        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         materials = [material[i+1].id, material[i+2].id, material[i+3].id, material[i+5].id]
-        random.shuffle(numbers)
-        index = f'{numbers[6]}{numbers[3]}1{numbers[0]}{numbers[5]}{numbers[2]}{numbers[4]}{numbers[1]}{numbers[3]}{numbers[-1]}'
+        index = f'500{i+10}00000'
         good = Good.objects.create(name=f'Good No{i}', index=index, description=f'Desc about element{i}', quantity=i)
         for j in materials:
             GoodMaterial.objects.create(good=good, material=Material.objects.get(id=j),

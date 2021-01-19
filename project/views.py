@@ -121,6 +121,10 @@ class DeleteWorkStation(LoginRequiredMixin, DeleteView):
 
 
 class CreateSupplier(LoginRequiredMixin, CreateView):
+    """
+    PL: Generyczny widok tworzenia obiektu Supplier.
+    EN: Supplier Generic Create View.
+    """
     model = Supplier
     form_class = CreateSupplierForm
     template_name = 'create.html'
@@ -128,23 +132,43 @@ class CreateSupplier(LoginRequiredMixin, CreateView):
 
 
 class ListSupplier(ListView):
+    """
+    PL: Generyczny widok listy obiektów Supplier.
+    EN: Supplier Generic List View.
+    """
     model = Supplier
     template_name = 'listsupplier.html'
 
 
 class UpdateSupplier(LoginRequiredMixin, UpdateView):
+    """
+    PL: Generyczny widok aktualizacji obiektu Supplier.
+    EN: Supplier Generic Update View.
+    """
     model = Supplier
     fields = '__all__'
     template_name = 'update.html'
     success_url = reverse_lazy('listSupplier')
 
 
-class DeleteSupplier(LoginRequiredMixin, DeleteView):
+class DeleteSupplier(LoginRequiredMixin, View):
     def get(self, request, pk):
+        """
+
+        :param request:
+        :param pk:
+        :return: render(request, 'deleteprotected.html', {'object':object})
+        """
         object = Supplier.objects.get(pk=pk)
         return render(request, 'deleteprotected.html', {'object':object})
 
     def post(self, request, pk):
+        """
+
+        :param request:
+        :param pk:
+        :return: render(request, 'deleteprotected.html', {'message' : message})
+        """
         try:
             object = Supplier.objects.get(pk=pk)
             object.delete()
@@ -155,6 +179,10 @@ class DeleteSupplier(LoginRequiredMixin, DeleteView):
 
 
 class CreateDiscountSupplier(LoginRequiredMixin, CreateView):
+    """
+    PL: Generyczny widok tworzenia obiektów DiscountSupplier.
+    EN: DiscountSupplier Generic Create View.
+    """
     model = DiscountSupplier
     fields = '__all__'
     template_name = 'create.html'
@@ -162,11 +190,19 @@ class CreateDiscountSupplier(LoginRequiredMixin, CreateView):
 
 
 class ListDiscountSupplier(ListView):
+    """
+    PL: Generyczny widok listy obiektów DiscountSupplier.
+    EN: DiscountSupplier Generic List View.
+    """
     model = DiscountSupplier
     template_name = 'list.html'
 
 
 class UpdateDiscountSupplier(LoginRequiredMixin, UpdateView):
+    """
+    PL: Generyczny widok aktualizacji obiektu DiscountSupplier.
+    EN: DiscountSupplier Generic Update View.
+    """
     model = DiscountSupplier
     fields = '__all__'
     template_name = 'update.html'
@@ -174,12 +210,20 @@ class UpdateDiscountSupplier(LoginRequiredMixin, UpdateView):
 
 
 class DeleteDiscountSupplier(LoginRequiredMixin, DeleteView):
+    """
+    PL: Generyczny widok usuwania obiektu DiscountSupplier.
+    EN: DiscountSupplier Generic Delete View.
+    """
     model = DiscountSupplier
     template_name = 'delete.html'
     success_url = reverse_lazy('listDiscountSupplier')
 
 
 class CreateCustomer(LoginRequiredMixin, CreateView):
+    """
+    PL: Generyczny widok do tworzenia obiektu Customer.
+    EN: Generic view for creating a Customer.
+    """
     model = Customer
     form_class = CreateCustomerForm
     template_name = 'create.html'
@@ -187,24 +231,32 @@ class CreateCustomer(LoginRequiredMixin, CreateView):
 
 
 class ListCustomer(ListView):
+    """
+    PL: Generyczny widok listy obiektów Customer.
+    EN: Customer Generic List View.
+    """
     model = Customer
     template_name = 'listcustomer.html'
 
 
 class UpdateCustomer(LoginRequiredMixin, UpdateView):
+    """
+    PL: Generyczny widok aktualizacji obiektu Customer.
+    EN: Customer Generic Update View.
+    """
     model = Customer
     fields = '__all__'
     template_name = 'update.html'
     success_url = reverse_lazy('listCustomer')
 
 
-class DeleteCustomer(LoginRequiredMixin, DeleteView):
+class DeleteCustomer(LoginRequiredMixin, View):
     def get(self, request, pk):
         """
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'deleteprotected.html', {'object':object})
         """
 
         object = Customer.objects.get(pk=pk)
@@ -215,7 +267,7 @@ class DeleteCustomer(LoginRequiredMixin, DeleteView):
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'deleteprotected.html', {'message' : message})
         """
         try:
             object = Customer.objects.get(pk=pk)
@@ -227,6 +279,10 @@ class DeleteCustomer(LoginRequiredMixin, DeleteView):
 
 
 class CreateDiscountCustomer(LoginRequiredMixin, CreateView):
+    """
+    PL: Generyczny widok do tworzenia obiektu DiscountCustomer.
+    EN: Generic view for creating a DiscountCustomer.
+    """
     model = DiscountCustomer
     fields = '__all__'
     template_name = 'create.html'
@@ -234,11 +290,19 @@ class CreateDiscountCustomer(LoginRequiredMixin, CreateView):
 
 
 class ListDiscountCustomer(ListView):
+    """
+    PL: Generyczny widok listy obiektów DiscountCustomer.
+    EN: Customer Generic List View.
+    """
     model = DiscountCustomer
     template_name = 'list.html'
 
 
 class UpdateDiscountCustomer(LoginRequiredMixin, UpdateView):
+    """
+    PL: Generyczny widok aktualizacji obiektu DiscountCustomer.
+    EN: DiscountCustomer Generic Update View.
+    """
     model = DiscountCustomer
     fields = '__all__'
     template_name = 'update.html'
@@ -246,12 +310,20 @@ class UpdateDiscountCustomer(LoginRequiredMixin, UpdateView):
 
 
 class DeleteDiscountCustomer(LoginRequiredMixin, DeleteView):
+    """
+    PL: Generyczny widok usuwania obiektu DiscountCustomer.
+    EN: DiscountCustomer Generic Delete View.
+    """
     model = DiscountCustomer
     template_name = 'delete.html'
     success_url = reverse_lazy('listDiscountCustomer')
 
 
 class CreateMaterial(LoginRequiredMixin, CreateView):
+    """
+    PL: Generyczny widok do tworzenia obiektu Material.
+    EN: Generic view for creating a Material.
+    """
     model = Material
     form_class = CreateMaterialForm
     template_name = 'create.html'
@@ -259,11 +331,19 @@ class CreateMaterial(LoginRequiredMixin, CreateView):
 
 
 class ListMaterial(ListView):
+    """
+    PL: Generyczny widok listy obiektów Material.
+    EN: Material Generic List View.
+    """
     model = Material
     template_name = 'list.html'
 
 
 class UpdateMaterial(LoginRequiredMixin, UpdateView):
+    """
+    PL: Generyczny widok aktualizacji obiektu Material.
+    EN: Material Generic Update View.
+    """
     model = Material
     fields = '__all__'
     template_name = 'update.html'
@@ -276,7 +356,7 @@ class DeleteMaterial(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'deleteprotected.html', {'object':object})
         """
         object = Material.objects.get(pk=pk)
         return render(request, 'deleteprotected.html', {'object':object})
@@ -286,7 +366,7 @@ class DeleteMaterial(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'deleteprotected.html', {'message' : message})
         """
         try:
             object = Material.objects.get(pk=pk)
@@ -303,7 +383,8 @@ class CreateDocumentSupplier(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'createdocumentsuppliermanual.html', {'supplier':supplier,
+                                                                     'materials':materials, 'number':number, 'destinations': destinations})
         """
         supplier = Supplier.objects.get(pk=pk)
         materials = Material.objects.filter(supplier_id=supplier.id)
@@ -317,7 +398,7 @@ class CreateDocumentSupplier(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:redirect('listDocumentSupplier')
         """
         materials = request.POST.getlist('materials')
         supplier = Supplier.objects.get(pk=pk)
@@ -329,23 +410,12 @@ class CreateDocumentSupplier(LoginRequiredMixin, View):
 
 
 class ListDocumentSupplier(ListView):
+    """
+    PL: Generyczny widok listy obiektów DocumentSupplier.
+    EN: DocumentSupplier Generic List View.
+    """
     model = DocumentSupplier
     template_name = 'list.html'
-
-
-# class UpdateDocumentSupplier(UpdateView):
-#     model = DocumentSupplier
-#     form_class = UpdateDocSupplierForm
-#     form.fields['materials'].queryset = Material.objects.filter(supplier=model.supplier_id)
-#     template_name = 'update.html'
-#     success_url = reverse_lazy('listDocumentSupplier')
-#
-#
-# class UpdateDocumentSupplier(UpdateView):
-#     model = DocumentSupplier
-#     form_class = UpdateDocSupplierForm
-#     template_name = 'update.html'
-#     success_url = reverse_lazy('listDocumentSupplier')
 
 
 class UpdateDocumentSupplier(LoginRequiredMixin, View):
@@ -353,7 +423,7 @@ class UpdateDocumentSupplier(LoginRequiredMixin, View):
         """
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'updatedocumentsuppliermanual.html', context)
         """
         document = DocumentSupplier.objects.get(pk=pk)
         supplier = document.supplier
@@ -370,7 +440,7 @@ class UpdateDocumentSupplier(LoginRequiredMixin, View):
         """
         :param request:
         :param pk:
-        :return:
+        :return:redirect('listDocumentSupplier')
         """
         materials = request.POST.getlist('materials')
         number = request.POST.get('number')
@@ -384,6 +454,10 @@ class UpdateDocumentSupplier(LoginRequiredMixin, View):
 
 
 class DeleteDocumentSupplier(LoginRequiredMixin, DeleteView):
+    """
+    PL: Generyczny widok usuwania obiektu DocumentSupplier.
+    EN: DocumentSupplier Generic Delete View.
+    """
     model = DocumentSupplier
     template_name = 'delete.html'
     success_url = reverse_lazy('listDocumentSupplier')
@@ -393,7 +467,7 @@ class CreateGood(LoginRequiredMixin, View):
     def get(self, request):
         """
         :param request:
-        :return:
+        :return:render(request, 'creategoodmanual.html', {'materials':materials})
         """
         materials = Material.objects.all()
         return render(request, 'creategoodmanual.html', {'materials':materials})
@@ -401,7 +475,7 @@ class CreateGood(LoginRequiredMixin, View):
     def post(self, request):
         """
         :param request:
-        :return:
+        :return:redirect('listGood')
         """
         name = request.POST.get('name')
         index = request.POST.get('index')
@@ -424,22 +498,23 @@ class CreateGood(LoginRequiredMixin, View):
 
 
 class ListGood(ListView):
+    """
+    PL: Generyczny widok listy obiektów Good.
+    EN: Good Generic List View.
+    """
     model = Good
     template_name = 'list.html'
 
 
-# class UpdateGood(LoginRequiredMixin, UpdateView):
-#     model = Good
-#     fields = '__all__'
-#     template_name = 'update.html'
-#     success_url = reverse_lazy('listGood')
+
 class UpdateGood(LoginRequiredMixin, View):
     def get(self, request, pk):
         """
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'updategoodmanual.html', {'good' : good,
+                                                         'needs' : needs, 'rest_materials': rest_materials})
         """
         good = Good.objects.get(pk=pk)
         materials = good.material.all()
@@ -461,7 +536,7 @@ class UpdateGood(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:redirect('listGood')
         """
         good = Good.objects.get(pk=pk)
         name = request.POST.get('name')
@@ -488,6 +563,10 @@ class UpdateGood(LoginRequiredMixin, View):
 
 
 class DeleteGood(LoginRequiredMixin, DeleteView):
+    """
+    PL: Generyczny widok usuwania obiektu Good.
+    EN: Good Generic Delete View.
+    """
     model = Good
     template_name = 'delete.html'
     success_url = reverse_lazy('listGood')
@@ -499,7 +578,8 @@ class CreateDocumentCustomer(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'createdocumentcustomermanual.html', {'customer':customer,
+                                                                     'goods':goods, 'number':number, 'destinations': destinations})
         """
         customer = Customer.objects.get(pk=pk)
         goods = Good.objects.all()
@@ -513,7 +593,7 @@ class CreateDocumentCustomer(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:redirect('listDocumentCustomer')
         """
         goods = request.POST.getlist('goods')
         customer = Customer.objects.get(pk=pk)
@@ -525,11 +605,19 @@ class CreateDocumentCustomer(LoginRequiredMixin, View):
 
 
 class ListDocumentCustomer(ListView):
+    """
+    PL: Generyczny widok listy obiektów DocumentCustomer.
+    EN: DocumentCustomer Generic List View.
+    """
     model = DocumentCustomer
     template_name = 'list.html'
 
 
 class UpdateDocumentCustomer(LoginRequiredMixin, UpdateView):
+    """
+    PL: Generyczny widok aktualizacji obiektu DocumentCustomer.
+    EN: DocumentCustomer Generic Update View.
+    """
     model = DocumentCustomer
     fields = '__all__'
     template_name = 'update.html'
@@ -537,6 +625,10 @@ class UpdateDocumentCustomer(LoginRequiredMixin, UpdateView):
 
 
 class DeleteDocumentCustomer(LoginRequiredMixin, DeleteView):
+    """
+    PL: Generyczny widok usuwania obiektu DocumentCustomer.
+    EN: DocumentCustomer Generic Delete View.
+    """
     model = DocumentCustomer
     template_name = 'delete.html'
     success_url = reverse_lazy('listDocumentCustomer')
@@ -548,7 +640,7 @@ class TryPoduceGood(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'tryproduce.html', context)
         """
         good = Good.objects.get(pk=pk)
         materials = good.material.all()
@@ -563,7 +655,7 @@ class TryPoduceGood(LoginRequiredMixin, View):
 
         :param request:
         :param pk:
-        :return:
+        :return:render(request, 'tryproduce.html', context)
         """
         produce_quantity = int(request.POST.get('produce_quantity'))
         good = Good.objects.get(pk=pk)
@@ -588,3 +680,25 @@ class TryPoduceGood(LoginRequiredMixin, View):
         good.save()
         context = {'message': f'Wyprodukowano {produce_quantity} szt.', 'needs': needs, 'good':good}
         return render(request, 'tryproduce.html', context)
+
+
+# class UpdateDocumentSupplier(UpdateView):
+#     model = DocumentSupplier
+#     form_class = UpdateDocSupplierForm
+#     form.fields['materials'].queryset = Material.objects.filter(supplier=model.supplier_id)
+#     template_name = 'update.html'
+#     success_url = reverse_lazy('listDocumentSupplier')
+#
+#
+# class UpdateDocumentSupplier(UpdateView):
+#     model = DocumentSupplier
+#     form_class = UpdateDocSupplierForm
+#     template_name = 'update.html'
+#     success_url = reverse_lazy('listDocumentSupplier')
+
+
+# class UpdateGood(LoginRequiredMixin, UpdateView):
+#     model = Good
+#     fields = '__all__'
+#     template_name = 'update.html'
+#     success_url = reverse_lazy('listGood')
